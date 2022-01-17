@@ -11,6 +11,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(204).send(null);
     return;
   }
+  const questaoRespostaEmbaralhada =
+    questaoSelecionada[0].embaralharRespostas();
 
-  res.status(200).json(questaoSelecionada[0].paraObjeto());
+  res.status(200).json(questaoRespostaEmbaralhada.paraObjeto());
 }
