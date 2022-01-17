@@ -41,4 +41,13 @@ export default class QuestaoModel {
 
     return false;
   }
+
+  paraObjeto() {
+    return {
+      id: this._id,
+      enunciado: this._enunciado,
+      acertou: this._acertou,
+      respostas: this._respostas.map((resposta) => resposta.paraObjeto()),
+    };
+  }
 }

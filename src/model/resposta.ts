@@ -9,6 +9,14 @@ export default class RespostaModel {
     this._revelada = revelada;
   }
 
+  static certa(valor: string): RespostaModel {
+    return new RespostaModel(valor, true);
+  }
+
+  static errada(valor: string): RespostaModel {
+    return new RespostaModel(valor, true);
+  }
+
   get valor(): string {
     return this._valor;
   }
@@ -19,5 +27,13 @@ export default class RespostaModel {
 
   get revelada(): boolean {
     return this._revelada;
+  }
+
+  paraObjeto() {
+    return {
+      valor: this._valor,
+      certa: this._certa,
+      revelada: this._revelada,
+    };
   }
 }
