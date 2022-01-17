@@ -43,6 +43,19 @@ export default class QuestaoModel {
     return false;
   }
 
+  responder(indice: number): QuestaoModel {
+    const acertou = this._respostas[indice]?.certa;
+
+    const respostas = this._respostas.map((resposta, i) => {
+      const respostaSelecionada = indice === i;
+      const deveRelevar = respostaSelecionada || resposta.certa;
+
+      return deveRelevar ? resposta.revelar() : resposta;
+    });
+
+    return new QuestaoModel(this._id, this._enunciado, respostas, acertou);
+  }
+
   embaralharRespostas(): QuestaoModel {
     const respostasEmbaralhadas = embaralhar(this.respostas);
 
