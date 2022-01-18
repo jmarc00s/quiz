@@ -27,7 +27,7 @@ const Questionario = ({
     <div className={styles.questionario}>
       <Questao
         valor={questao}
-        tempoParaResposta={6}
+        tempoParaResposta={50}
         tempoEsgotado={irProximoPasso}
         aoResponder={respostaFornecida}
       />
