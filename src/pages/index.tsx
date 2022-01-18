@@ -5,6 +5,8 @@ import QuestaoModel from "../model/questao";
 import RespostaModel from "../model/resposta";
 import styles from "../styles/Home.module.css";
 
+import { useRouter } from "next/router";
+
 import { useFetch } from "../hooks/useFetch";
 
 const QUESTAO_MOCK = new QuestaoModel(1, "Melhor cor?", [
@@ -18,8 +20,11 @@ const BASE_URL = "http://localhost:3000/api";
 
 const Home: NextPage = () => {
   const { request } = useFetch();
+  const router = useRouter();
+
   const [questao, setQuestao] = React.useState<QuestaoModel>(QUESTAO_MOCK);
   const [questoesId, setQuestoesId] = React.useState<number[]>([]);
+  const [respostasCertas, setRespostasCertas] = React.useState(0);
 
   React.useEffect(() => {
     carregarIdsQuestoes();
@@ -36,13 +41,41 @@ const Home: NextPage = () => {
 
   async function carregarQuestao(id: number) {
     const data = await request(`/questoes/${id}`, "GET");
-    //setQuestao(data);
-    console.log(data);
+    const novaQuestao = QuestaoModel.criarUsandoObjeto(data);
+    setQuestao(novaQuestao);
   }
 
   function irProximoPasso(): void {
-    if (questao.naoRespondida) {
-      setQuestao(questao.responder(-1));
+    const proximoId = idProximaPergunta();
+    proximoId ? irProximaQuestao(proximoId) : finalizar();
+  }
+
+  function irProximaQuestao(id: number): void {
+    carregarQuestao(id);
+  }
+
+  function finalizar() {
+    router.push({
+      pathname: "/resultado",
+      query: {
+        total: questoesId.length,
+        certas: respostasCertas,
+      },
+    });
+  }
+
+  function idProximaPergunta() {
+    if (questao) {
+      const proximoIndice = questoesId.indexOf(questao.id) + 1;
+      return questoesId[proximoIndice];
+    }
+  }
+
+  function aoResponder(questao: QuestaoModel): void {
+    setQuestao(questao);
+
+    if (questao.acertou) {
+      setRespostasCertas(respostasCertas + 1);
     }
   }
 
@@ -50,8 +83,8 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <Questionario
         questao={questao}
-        ultimaPergunta={true}
-        aoResponder={(questao) => setQuestao(questao)}
+        ultimaPergunta={!idProximaPergunta()}
+        aoResponder={aoResponder}
         irProximoPasso={irProximoPasso}
       />
     </div>

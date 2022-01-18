@@ -9,14 +9,6 @@ export default class RespostaModel {
     this._revelada = revelada;
   }
 
-  static certa(valor: string): RespostaModel {
-    return new RespostaModel(valor, true);
-  }
-
-  static errada(valor: string): RespostaModel {
-    return new RespostaModel(valor, false);
-  }
-
   get valor(): string {
     return this._valor;
   }
@@ -39,5 +31,21 @@ export default class RespostaModel {
       certa: this._certa,
       revelada: this._revelada,
     };
+  }
+
+  static certa(valor: string): RespostaModel {
+    return new RespostaModel(valor, true);
+  }
+
+  static errada(valor: string): RespostaModel {
+    return new RespostaModel(valor, false);
+  }
+
+  static criarUsandoObjeto({
+    valor,
+    certa,
+    revelada,
+  }: RespostaModel): RespostaModel {
+    return new RespostaModel(valor, certa, revelada);
   }
 }
