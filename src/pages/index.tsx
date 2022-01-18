@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import React from "react";
+import Botao from "../components/Botao";
 import Questao from "../components/Questao";
 import QuestaoModel from "../model/questao";
 import RespostaModel from "../model/resposta";
@@ -14,13 +15,18 @@ const QUESTAO_MOCK = new QuestaoModel(1, "Melhor cor?", [
 
 const Home: NextPage = () => {
   const [questao, setQuestao] = React.useState(QUESTAO_MOCK);
+  const questaoRef = React.useRef<QuestaoModel>();
+
+  React.useEffect(() => {
+    questaoRef.current = questao;
+  }, [questao]);
 
   function aoResponder(indice: number): void {
     setQuestao(questao.responder(indice));
   }
 
   function tempoEsgotado(): void {
-    if (questao.naoRespondida) {
+    if (questaoRef.current?.naoRespondida) {
       setQuestao(questao.responder(-1));
     }
   }
@@ -31,7 +37,9 @@ const Home: NextPage = () => {
         valor={questao}
         aoResponder={aoResponder}
         tempoEsgotado={tempoEsgotado}
+        tempoParaResposta={5}
       />
+      <Botao texto="Próxima" href="resultado" />
     </div>
   );
 };
