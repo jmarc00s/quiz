@@ -1,0 +1,70 @@
+.resposta {
+  display: flex;
+  height: 100px;
+  margin: 10px;
+  width: 80%;
+  min-width: 500px;
+}
+
+.conteudoResposta {
+  position: relative;
+  display: flex;
+  flex: 1;
+}
+
+.letra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-right: 20px;
+  color: #fff;
+}
+
+.valor {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.frente,
+.verso {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  cursor: pointer;
+}
+
+.frente {
+  align-items: center;
+  border-radius: 12px;
+  padding: 15px;
+  color: #000;
+  background-color: #fff;
+}
+
+.verso > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  border-radius: 12px;
+}
+
+.certa {
+  background-color: #2baa6d;
+}
+
+.errada {
+  background-color: #e44e4c;
+}
+
+.certa .valor,
+.errada .valor {
+  font-size: 1.5rem;
+}

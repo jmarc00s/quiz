@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/Enunciado.module.css";
+import styles from "./Enunciado.module.css";
 
 interface EnunciadoProps {
   texto: string;

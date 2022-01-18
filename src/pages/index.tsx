@@ -1,20 +1,27 @@
 import type { NextPage } from "next";
+import React from "react";
 import Questao from "../components/Questao";
 import QuestaoModel from "../model/questao";
 import RespostaModel from "../model/resposta";
 import styles from "../styles/Home.module.css";
 
+const QUESTAO_MOCK = new QuestaoModel(1, "Melhor cor?", [
+  RespostaModel.errada("Verde"),
+  RespostaModel.errada("Vermelho"),
+  RespostaModel.errada("Amarelo"),
+  RespostaModel.certa("Azul"),
+]);
+
 const Home: NextPage = () => {
-  const questaoTeste = new QuestaoModel(1, "Melhor cor?", [
-    RespostaModel.errada("Verde"),
-    RespostaModel.errada("Verde"),
-    RespostaModel.errada("Verde"),
-    RespostaModel.certa("Azul"),
-  ]);
+  const [questao, setQuestao] = React.useState(QUESTAO_MOCK);
+
+  function aoResponder(indice: number): void {
+    setQuestao(questao.responder(indice));
+  }
 
   return (
     <div className={styles.container}>
-      <Questao valor={questaoTeste} />
+      <Questao valor={questao} aoResponder={aoResponder} />
     </div>
   );
 };
