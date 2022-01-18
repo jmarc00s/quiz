@@ -19,9 +19,19 @@ const Home: NextPage = () => {
     setQuestao(questao.responder(indice));
   }
 
+  function tempoEsgotado(): void {
+    if (questao.naoRespondida) {
+      setQuestao(questao.responder(-1));
+    }
+  }
+
   return (
     <div className={styles.container}>
-      <Questao valor={questao} aoResponder={aoResponder} />
+      <Questao
+        valor={questao}
+        aoResponder={aoResponder}
+        tempoEsgotado={tempoEsgotado}
+      />
     </div>
   );
 };

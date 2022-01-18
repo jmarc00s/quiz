@@ -43,6 +43,10 @@ export default class QuestaoModel {
     return false;
   }
 
+  get naoRespondida(): boolean {
+    return !this.respondida;
+  }
+
   responder(indice: number): QuestaoModel {
     const acertou = this._respostas[indice]?.certa;
 
