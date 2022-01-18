@@ -81,12 +81,16 @@ const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <Questionario
-        questao={questao}
-        ultimaPergunta={!idProximaPergunta()}
-        aoResponder={aoResponder}
-        irProximoPasso={irProximoPasso}
-      />
+      {questao ? (
+        <Questionario
+          questao={questao}
+          ultimaPergunta={!idProximaPergunta()}
+          aoResponder={aoResponder}
+          irProximoPasso={irProximoPasso}
+        />
+      ) : (
+        false
+      )}
     </div>
   );
 };

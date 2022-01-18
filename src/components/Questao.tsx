@@ -29,12 +29,13 @@ const Questao = ({
     <div className={styles.questao}>
       <Enunciado texto={questao.enunciado} />
       <Temporizador
+        key={questao.id}
         duracao={tempoParaResposta ?? 10}
         tempoEsgotado={tempoEsgotado}
       />
       {questao?.respostas?.map((resposta, i) => (
         <Resposta
-          key={i}
+          key={`${questao.id} - ${i}`}
           valor={resposta}
           indice={i}
           letra={letras[i].valor}

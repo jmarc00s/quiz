@@ -1,0 +1,22 @@
+.estatistica {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.valor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  font-size: 4rem;
+}
+
+.texto {
+  color: #ddd;
+  font-size: 1.7rem;
+  text-align: center;
+  font-weight: 200;
+}
