@@ -8,4 +8,9 @@
   font-weight: 200;
   margin-top: 40px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.botao:hover {
+  transform: scale(1.1);
 }

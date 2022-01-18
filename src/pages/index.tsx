@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import React from "react";
 import Botao from "../components/Botao";
 import Questao from "../components/Questao";
+import Questionario from "../components/Questionario";
 import QuestaoModel from "../model/questao";
 import RespostaModel from "../model/resposta";
 import styles from "../styles/Home.module.css";
@@ -21,9 +22,7 @@ const Home: NextPage = () => {
     questaoRef.current = questao;
   }, [questao]);
 
-  function aoResponder(indice: number): void {
-    setQuestao(questao.responder(indice));
-  }
+  function aoResponder(questao: QuestaoModel): void {}
 
   function tempoEsgotado(): void {
     if (questaoRef.current?.naoRespondida) {
@@ -33,13 +32,12 @@ const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <Questao
-        valor={questao}
-        aoResponder={aoResponder}
-        tempoEsgotado={tempoEsgotado}
-        tempoParaResposta={5}
+      <Questionario
+        questao={questao}
+        ultimaPergunta={true}
+        aoResponder={(questao) => setQuestao(questao)}
+        irProximoPasso={() => {}}
       />
-      <Botao texto="Próxima" href="resultado" />
     </div>
   );
 };
